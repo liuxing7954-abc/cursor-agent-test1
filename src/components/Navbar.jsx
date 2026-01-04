@@ -17,27 +17,62 @@ function Navbar() {
   }, []);
 
   const navItems = [
-    { path: '/', label: '首页' },
+    { path: '/', label: '首页', exact: true },
     { path: '/#articles', label: '文章', hash: '#articles' },
     { path: '/#about', label: '关于', hash: '#about' },
     { path: '/#contact', label: '联系', hash: '#contact' },
-    { path: '/editor', label: '写文章' },
+    { path: '/editor', label: '写文章', exact: true },
   ];
 
   const isActive = (item) => {
-    if (item.path === '/' && location.pathname === '/') return true;
+    if (item.exact && location.pathname === item.path) return true;
     if (item.path === '/editor' && location.pathname === '/editor') return true;
     if (item.hash && location.hash === item.hash) return true;
+    if (item.path === '/' && location.pathname === '/' && !location.hash) return true;
     return false;
+  };
+
+  const handleNavClick = (e, item) => {
+    if (item.hash) {
+      e.preventDefault();
+      if (location.pathname !== '/') {
+        navigate('/');
+        setTimeout(() => {
+          const element = document.getElementById(item.hash.substring(1));
+          if (element) {
+            const offset = 80;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - offset;
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        }, 100);
+      } else {
+        const element = document.getElementById(item.hash.substring(1));
+        if (element) {
+          const offset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    }
+    setMobileMenuOpen(false);
   };
 
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
+      transition={{ duration: 0.3 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/80 backdrop-blur-xl border-b border-gray-200/50'
+          ? 'bg-white/80 backdrop-blur-xl border-b border-gray-200/50 shadow-sm'
           : 'bg-transparent'
       }`}
     >
@@ -47,18 +82,19 @@ function Navbar() {
             <motion.span
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="text-xl font-semibold text-black"
+              className="text-lg font-semibold text-black"
             >
               老王的技术博客
             </motion.span>
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
+                onClick={(e) => handleNavClick(e, item)}
                 className={`relative text-sm font-medium transition-colors ${
                   isActive(item)
                     ? 'text-black'
@@ -83,7 +119,7 @@ function Navbar() {
             className="md:hidden p-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </div>
@@ -95,14 +131,15 @@ function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
             className="md:hidden bg-white/95 backdrop-blur-xl border-t border-gray-200"
           >
-            <div className="px-6 py-4 space-y-4">
+            <div className="px-6 py-4 space-y-3">
               {navItems.map((item) => (
                 <Link
                   key={item.path}
                   to={item.path}
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(e) => handleNavClick(e, item)}
                   className={`block text-base font-medium ${
                     isActive(item) ? 'text-black' : 'text-gray-600'
                   }`}

@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Save, Eye, Type, Code, List, Bold } from 'lucide-react';
 import { markdownToHtml } from '../utils/markdown';
 import { Button } from '../components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 
 function Editor() {
   const navigate = useNavigate();
@@ -132,27 +131,28 @@ function Editor() {
   const previewContent = markdownToHtml(content);
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-20">
-      <div className="max-w-5xl mx-auto px-6 lg:px-12 py-10">
+    <div className="min-h-screen bg-white pt-20">
+      <div className="max-w-5xl mx-auto px-6 lg:px-12 py-12">
         {/* 头部 */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-10"
         >
-          <h1 className="text-3xl md:text-4xl font-semibold mb-6 tracking-tight">写文章</h1>
+          <h1 className="text-4xl md:text-5xl font-semibold mb-8 tracking-tight">写文章</h1>
           <div className="flex gap-3">
             <Button 
               onClick={handlePreview} 
               variant="outline"
-              className="group"
+              className="rounded-full group"
             >
               <Eye className="mr-2 h-4 w-4" />
               预览
             </Button>
             <Button 
               onClick={handleSave}
-              className="group"
+              className="rounded-full group"
             >
               <Save className="mr-2 h-4 w-4" />
               保存文章
@@ -161,112 +161,100 @@ function Editor() {
         </motion.div>
 
         {/* 表单区域 */}
-        <div className="space-y-5">
+        <div className="space-y-6">
           {/* 标题 */}
-          <Card className="border-0 shadow-md">
-            <CardHeader>
-              <CardTitle className="text-lg mb-3">标题</CardTitle>
-              <input
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className="w-full px-4 py-3 text-lg border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                placeholder="输入文章标题"
-              />
-            </CardHeader>
-          </Card>
+          <div className="bg-white rounded-2xl border border-gray-200 p-6">
+            <label className="block text-sm font-medium mb-3 text-gray-700">标题</label>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="w-full px-4 py-3 text-lg border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+              placeholder="输入文章标题"
+            />
+          </div>
 
           {/* 摘要 */}
-          <Card className="border-0 shadow-md">
-            <CardHeader>
-              <CardTitle className="text-lg mb-3">摘要</CardTitle>
-              <textarea
-                value={excerpt}
-                onChange={(e) => setExcerpt(e.target.value)}
-                rows="3"
-                className="w-full px-4 py-3 text-base border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent resize-none transition-all"
-                placeholder="输入文章摘要"
-              />
-            </CardHeader>
-          </Card>
+          <div className="bg-white rounded-2xl border border-gray-200 p-6">
+            <label className="block text-sm font-medium mb-3 text-gray-700">摘要</label>
+            <textarea
+              value={excerpt}
+              onChange={(e) => setExcerpt(e.target.value)}
+              rows="3"
+              className="w-full px-4 py-3 text-base border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent resize-none transition-all"
+              placeholder="输入文章摘要"
+            />
+          </div>
 
           {/* 元信息 */}
           <div className="grid md:grid-cols-3 gap-4">
-            <Card className="border-0 shadow-md">
-              <CardHeader>
-                <CardTitle className="text-base mb-3">分类</CardTitle>
-                <select
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  className="w-full px-4 py-2.5 text-base border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                >
-                  <option value="tech">技术</option>
-                  <option value="life">生活</option>
-                </select>
-              </CardHeader>
-            </Card>
-            <Card className="border-0 shadow-md">
-              <CardHeader>
-                <CardTitle className="text-base mb-3">日期</CardTitle>
-                <input
-                  type="date"
-                  value={date}
-                  onChange={(e) => setDate(e.target.value)}
-                  className="w-full px-4 py-2.5 text-base border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                />
-              </CardHeader>
-            </Card>
-            <Card className="border-0 shadow-md">
-              <CardHeader>
-                <CardTitle className="text-base mb-3">阅读时长</CardTitle>
-                <input
-                  type="text"
-                  value={readTime}
-                  onChange={(e) => setReadTime(e.target.value)}
-                  className="w-full px-4 py-2.5 text-base border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                  placeholder="如：5分钟"
-                />
-              </CardHeader>
-            </Card>
+            <div className="bg-white rounded-2xl border border-gray-200 p-6">
+              <label className="block text-sm font-medium mb-3 text-gray-700">分类</label>
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className="w-full px-4 py-2.5 text-base border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+              >
+                <option value="tech">技术</option>
+                <option value="life">生活</option>
+              </select>
+            </div>
+            <div className="bg-white rounded-2xl border border-gray-200 p-6">
+              <label className="block text-sm font-medium mb-3 text-gray-700">日期</label>
+              <input
+                type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                className="w-full px-4 py-2.5 text-base border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+              />
+            </div>
+            <div className="bg-white rounded-2xl border border-gray-200 p-6">
+              <label className="block text-sm font-medium mb-3 text-gray-700">阅读时长</label>
+              <input
+                type="text"
+                value={readTime}
+                onChange={(e) => setReadTime(e.target.value)}
+                className="w-full px-4 py-2.5 text-base border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                placeholder="如：5分钟"
+              />
+            </div>
           </div>
 
           {/* 内容编辑器 */}
-          <Card className="border-0 shadow-md">
-            <CardHeader>
-              <div className="flex items-center justify-between mb-3">
-                <CardTitle className="text-lg">内容 (Markdown格式)</CardTitle>
-                <div className="flex gap-2">
-                  {[
-                    { icon: Type, label: 'H1', action: () => insertMarkdown('# ', '') },
-                    { icon: Type, label: 'H2', action: () => insertMarkdown('## ', '') },
-                    { icon: Bold, label: 'B', action: () => insertMarkdown('**', '**') },
-                    { icon: Code, label: 'Code', action: () => insertMarkdown('`', '`') },
-                    { icon: Code, label: '```', action: insertCodeBlock },
-                    { icon: List, label: 'List', action: () => insertMarkdown('- ', '') },
-                  ].map((btn) => (
-                    <motion.button
-                      key={btn.label}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={btn.action}
-                      className="p-2 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors"
-                      title={btn.label}
-                    >
-                      <btn.icon className="h-3.5 w-3.5" />
-                    </motion.button>
-                  ))}
-                </div>
+          <div className="bg-white rounded-2xl border border-gray-200 p-6">
+            <div className="flex items-center justify-between mb-4">
+              <label className="block text-sm font-medium text-gray-700">内容 (Markdown格式)</label>
+              <div className="flex gap-2">
+                {[
+                  { icon: Type, label: 'H1', action: () => insertMarkdown('# ', '') },
+                  { icon: Type, label: 'H2', action: () => insertMarkdown('## ', '') },
+                  { icon: Bold, label: 'B', action: () => insertMarkdown('**', '**') },
+                  { icon: Code, label: 'Code', action: () => insertMarkdown('`', '`') },
+                  { icon: Code, label: '```', action: insertCodeBlock },
+                  { icon: List, label: 'List', action: () => insertMarkdown('- ', '') },
+                ].map((btn) => (
+                  <motion.button
+                    key={btn.label}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={btn.action}
+                    className="p-2 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                    title={btn.label}
+                  >
+                    <btn.icon className="h-3.5 w-3.5" />
+                  </motion.button>
+                ))}
               </div>
-              <textarea
-                id="articleContent"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-                rows="20"
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent font-mono text-sm resize-none transition-all"
-                placeholder="在这里输入文章内容，支持 Markdown 格式..."
-              />
-            </CardHeader>
-          </Card>
+            </div>
+            <textarea
+              id="articleContent"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              rows="20"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent font-mono text-sm resize-none transition-all"
+              placeholder="在这里输入文章内容，支持 Markdown 格式..."
+            />
+          </div>
         </div>
 
         {/* 预览模态框 */}
@@ -276,17 +264,18 @@ function Editor() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4"
               onClick={() => setShowPreview(false)}
             >
               <motion.div
                 initial={{ scale: 0.95, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.95, opacity: 0 }}
+                transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
                 onClick={(e) => e.stopPropagation()}
-                className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl"
+                className="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl"
               >
-                <div className="flex items-center justify-between p-5 border-b border-gray-200">
+                <div className="flex items-center justify-between p-6 border-b border-gray-200">
                   <h2 className="text-xl font-semibold">文章预览</h2>
                   <button
                     onClick={() => setShowPreview(false)}
@@ -295,7 +284,7 @@ function Editor() {
                     <X size={20} />
                   </button>
                 </div>
-                <div className="overflow-y-auto p-6 prose prose-base max-w-none">
+                <div className="overflow-y-auto p-8 prose prose-lg max-w-none">
                   <div className="mb-6">
                     <span
                       className={`inline-block px-4 py-1.5 rounded-full text-xs font-semibold mb-4 ${

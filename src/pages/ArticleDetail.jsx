@@ -5,7 +5,6 @@ import { ArrowLeft, Calendar, Clock } from 'lucide-react';
 import { getArticleById } from '../data/articles';
 import { markdownToHtml } from '../utils/markdown';
 import { Button } from '../components/ui/button';
-import { Card, CardContent } from '../components/ui/card';
 
 function ArticleDetail() {
   const { id } = useParams();
@@ -23,7 +22,7 @@ function ArticleDetail() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center pt-20 bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center pt-20 bg-white">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -37,7 +36,7 @@ function ArticleDetail() {
 
   if (!article) {
     return (
-      <div className="min-h-screen flex items-center justify-center pt-20 bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center pt-20 bg-white">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -54,21 +53,21 @@ function ArticleDetail() {
 
   return (
     <div className="min-h-screen bg-white pt-20">
-      <article className="max-w-4xl mx-auto px-6 lg:px-12 py-12">
+      <article className="max-w-4xl mx-auto px-6 lg:px-12 py-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           {/* 返回按钮 */}
           <motion.div
             whileHover={{ x: -4 }}
-            className="mb-8"
+            className="mb-10"
           >
             <Button
               variant="ghost"
               onClick={() => navigate(-1)}
-              className="group -ml-4"
+              className="group -ml-4 rounded-full"
             >
               <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
               返回
@@ -79,10 +78,10 @@ function ArticleDetail() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.4 }}
-            className="mb-10"
+            transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="mb-12"
           >
-            <div className="mb-4">
+            <div className="mb-6">
               <span
                 className={`inline-block px-4 py-1.5 rounded-full text-xs font-semibold ${
                   article.category === 'tech'
@@ -94,7 +93,7 @@ function ArticleDetail() {
               </span>
             </div>
             
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-6 leading-tight tracking-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold mb-8 leading-tight tracking-tight">
               {article.title}
             </h1>
             
@@ -114,17 +113,18 @@ function ArticleDetail() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.4 }}
-            className="prose prose-base max-w-none 
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="prose prose-lg max-w-none 
               prose-headings:font-semibold 
               prose-headings:text-gray-900 
               prose-headings:tracking-tight
-              prose-h1:text-3xl
-              prose-h2:text-2xl
-              prose-h3:text-xl
+              prose-h1:text-4xl
+              prose-h2:text-3xl
+              prose-h3:text-2xl
               prose-p:text-gray-700 
               prose-p:leading-relaxed 
-              prose-p:text-base
+              prose-p:text-lg
+              prose-p:mb-6
               prose-a:text-blue-600 
               prose-a:no-underline
               prose-a:border-b
@@ -144,13 +144,17 @@ function ArticleDetail() {
               prose-pre:rounded-xl
               prose-pre:shadow-lg
               prose-pre:border-0
-              prose-pre:p-4
+              prose-pre:p-6
+              prose-pre:overflow-x-auto
               prose-li:text-gray-700
-              prose-li:text-base
+              prose-li:text-lg
               prose-li:leading-relaxed
+              prose-li:mb-2
+              prose-ul:mb-6
+              prose-ol:mb-6
               prose-blockquote:border-l-4
               prose-blockquote:border-gray-300
-              prose-blockquote:pl-4
+              prose-blockquote:pl-6
               prose-blockquote:italic
               prose-blockquote:text-gray-600
             "
@@ -161,24 +165,22 @@ function ArticleDetail() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.4 }}
-            className="mt-12 pt-8 border-t border-gray-200"
+            transition={{ delay: 0.3, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-16 pt-12 border-t border-gray-200"
           >
-            <Card className="border-0 shadow-md bg-gradient-to-br from-gray-50 to-white">
-              <CardContent className="p-6 text-center">
-                <p className="text-base text-gray-700 mb-4 font-light">
-                  感谢阅读，如果对你有帮助，欢迎分享给更多人。
-                </p>
-                <div className="flex gap-3 justify-center">
-                  <Button onClick={() => navigate('/')} variant="outline" size="sm">
-                    返回首页
-                  </Button>
-                  <Button onClick={() => navigate('/editor')} size="sm">
-                    写文章
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+            <div className="bg-gray-50 rounded-2xl p-8 text-center">
+              <p className="text-base text-gray-700 mb-6 font-light">
+                感谢阅读，如果对你有帮助，欢迎分享给更多人。
+              </p>
+              <div className="flex gap-3 justify-center">
+                <Button onClick={() => navigate('/')} variant="outline" size="sm" className="rounded-full">
+                  返回首页
+                </Button>
+                <Button onClick={() => navigate('/editor')} size="sm" className="rounded-full">
+                  写文章
+                </Button>
+              </div>
+            </div>
           </motion.div>
         </motion.div>
       </article>

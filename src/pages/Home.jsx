@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { getAllArticles } from '../data/articles';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Mail, Github, MessageCircle } from 'lucide-react';
 
 function Home() {
   const navigate = useNavigate();
@@ -267,85 +267,96 @@ function Home() {
         </div>
       </section>
 
-      {/* Contact Section - 苹果风格精美卡片 */}
+      {/* Contact Section - 完全重新设计 */}
       <section 
         ref={contactRef}
         id="contact" 
-        className="py-32 bg-white"
+        className="py-32 bg-black text-white relative overflow-hidden"
       >
-        <div className="max-w-5xl mx-auto px-6 lg:px-12">
+        {/* 背景装饰 */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500 rounded-full blur-3xl" />
+        </div>
+
+        <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={contactInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="text-center mb-20"
           >
-            <h2 className="text-5xl md:text-6xl font-semibold mb-4 tracking-tight">联系我</h2>
-            <p className="text-xl text-gray-600 font-light mb-2">Get in Touch</p>
-            <p className="text-base text-gray-600 max-w-xl mx-auto font-light leading-relaxed">
-              如果你对我的文章感兴趣，或者有技术问题想交流，欢迎通过以下方式联系我。
+            <h2 className="text-5xl md:text-6xl font-semibold mb-6 tracking-tight">保持联系</h2>
+            <p className="text-xl text-gray-400 font-light max-w-2xl mx-auto">
+              如果你对我的文章感兴趣，或者有技术问题想交流，欢迎通过以下方式联系我
             </p>
           </motion.div>
 
-          {/* 联系卡片 - 苹果风格 */}
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          {/* 横向布局的联系方式 */}
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 mb-16">
             {[
               { 
-                icon: '📧', 
+                icon: Mail, 
                 title: 'Email', 
-                description: '发送邮件给我',
+                value: 'your-email@example.com',
                 href: 'mailto:your-email@example.com',
-                gradient: 'from-blue-500 to-cyan-500'
+                color: 'text-blue-400'
               },
               { 
-                icon: '💻', 
+                icon: Github, 
                 title: 'GitHub', 
-                description: '查看我的代码',
+                value: 'github.com/username',
                 href: 'https://github.com',
                 target: '_blank',
-                gradient: 'from-gray-700 to-gray-900'
+                color: 'text-gray-300'
               },
               { 
-                icon: '📝', 
+                icon: MessageCircle, 
                 title: '其他平台', 
-                description: '更多联系方式',
+                value: '更多联系方式',
                 href: '#',
-                gradient: 'from-purple-500 to-pink-500'
+                color: 'text-purple-400'
               },
-            ].map((link, index) => (
+            ].map((item, index) => (
               <motion.a
-                key={link.title}
-                href={link.href}
-                target={link.target}
-                rel={link.target ? 'noopener noreferrer' : undefined}
-                initial={{ opacity: 0, y: 30 }}
-                animate={contactInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                key={item.title}
+                href={item.href}
+                target={item.target}
+                rel={item.target ? 'noopener noreferrer' : undefined}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={contactInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
                 transition={{ 
                   duration: 0.6, 
                   delay: 0.2 + index * 0.1,
                   ease: [0.16, 1, 0.3, 1]
                 }}
-                whileHover={{ y: -6 }}
-                className="group relative block"
+                whileHover={{ scale: 1.05, y: -4 }}
+                className="group flex flex-col items-center text-center p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 min-w-[200px]"
               >
-                <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 h-full">
-                  {/* 渐变背景 */}
-                  <div className={`h-20 bg-gradient-to-br ${link.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-                  <div className="p-6 -mt-10 relative z-10">
-                    <div className="w-14 h-14 bg-white rounded-xl shadow-md flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                      {link.icon}
-                    </div>
-                    <h3 className="text-lg font-semibold mb-1">{link.title}</h3>
-                    <p className="text-sm text-gray-600 font-light mb-4">{link.description}</p>
-                    <div className="flex items-center text-gray-500 group-hover:text-black transition-colors text-sm">
-                      <span>了解更多</span>
-                      <ArrowRight className="ml-2 h-3 w-3 transition-transform group-hover:translate-x-1" />
-                    </div>
-                  </div>
+                <div className={`mb-4 ${item.color} group-hover:scale-110 transition-transform duration-300`}>
+                  <item.icon size={32} />
                 </div>
+                <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+                <p className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors">
+                  {item.value}
+                </p>
               </motion.a>
             ))}
           </div>
+
+          {/* 底部说明文字 */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={contactInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="text-center"
+          >
+            <div className="inline-block px-8 py-4 rounded-full bg-white/5 backdrop-blur-sm border border-white/10">
+              <p className="text-sm text-gray-400 leading-relaxed">
+                期待与你交流技术心得，共同成长
+              </p>
+            </div>
+          </motion.div>
         </div>
       </section>
     </div>

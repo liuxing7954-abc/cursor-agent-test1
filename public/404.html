@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="后端开发者的技术博客 - 分享后端开发经验与生活记录">
+    <title>老王的技术博客</title>
+    <script>
+        // 重定向到 index.html，让 React Router 处理路由
+        var path = window.location.pathname;
+        var search = window.location.search;
+        var hash = window.location.hash;
+        var basePath = '/cursor-agent-test1';
+        
+        // 如果路径不是以 basePath 开头，添加它
+        if (!path.startsWith(basePath)) {
+            path = basePath + path;
+        }
+        
+        // 重定向到 index.html，保留路径和查询参数
+        window.location.replace(basePath + '/index.html' + (path !== basePath + '/' ? '#' + path.replace(basePath, '') : '') + search + hash);
+    </script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="module" src="/cursor-agent-test1/src/main.jsx"></script>
+</body>
+</html>

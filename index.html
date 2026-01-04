@@ -12,13 +12,14 @@
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
-                <h1>老王的技术博客</h1>
+                <span class="brand-icon">⚡</span>
+                <span class="brand-text">老王的技术博客</span>
             </div>
             <ul class="nav-menu">
-                <li><a href="#home">首页</a></li>
-                <li><a href="#articles">文章</a></li>
-                <li><a href="#about">关于</a></li>
-                <li><a href="#contact">联系</a></li>
+                <li><a href="#home" class="nav-link">首页</a></li>
+                <li><a href="#articles" class="nav-link">文章</a></li>
+                <li><a href="#about" class="nav-link">关于</a></li>
+                <li><a href="#contact" class="nav-link">联系</a></li>
             </ul>
         </div>
     </nav>
@@ -27,9 +28,14 @@
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
-                <h2 class="hero-title">后端开发者的技术分享</h2>
-                <p class="hero-subtitle">专注后端技术，分享开发经验与生活感悟</p>
-                <div class="hero-buttons">
+                <h1 class="hero-title">
+                    <span class="title-line">后端开发者的</span>
+                    <span class="title-line highlight">技术分享</span>
+                </h1>
+                <p class="hero-description">
+                    专注后端技术，分享开发经验与生活感悟
+                </p>
+                <div class="hero-actions">
                     <a href="#articles" class="btn btn-primary">查看文章</a>
                     <a href="#about" class="btn btn-secondary">了解更多</a>
                 </div>
@@ -40,12 +46,23 @@
     <!-- 关于我 -->
     <section id="about" class="about">
         <div class="container">
-            <h2 class="section-title">关于我</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>你好，我是一名后端开发者，专注于构建稳定、高效的服务器端应用。</p>
-                    <p>在这个博客里，我会分享后端开发的技术经验、踩坑记录，以及一些生活感悟。</p>
-                    <h3>技术栈</h3>
+            <div class="section-header">
+                <h2 class="section-title">关于我</h2>
+                <p class="section-subtitle">Backend Developer</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="card-content">
+                        <p class="about-text">
+                            你好，我是一名后端开发者，专注于构建稳定、高效的服务器端应用。
+                        </p>
+                        <p class="about-text">
+                            在这个博客里，我会分享后端开发的技术经验、踩坑记录，以及一些生活感悟。
+                        </p>
+                    </div>
+                </div>
+                <div class="about-card">
+                    <h3 class="card-title">技术栈</h3>
                     <div class="tech-stack">
                         <span class="tech-tag">Python</span>
                         <span class="tech-tag">Django</span>
@@ -66,7 +83,10 @@
     <!-- 文章列表 -->
     <section id="articles" class="articles">
         <div class="container">
-            <h2 class="section-title">最新文章</h2>
+            <div class="section-header">
+                <h2 class="section-title">最新文章</h2>
+                <p class="section-subtitle">Latest Articles</p>
+            </div>
             <div class="filter-tabs">
                 <button class="filter-btn active" data-filter="all">全部</button>
                 <button class="filter-btn" data-filter="tech">技术</button>
@@ -81,18 +101,26 @@
     <!-- 联系我 -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title">联系我</h2>
+            <div class="section-header">
+                <h2 class="section-title">联系我</h2>
+                <p class="section-subtitle">Get in Touch</p>
+            </div>
             <div class="contact-content">
-                <p>如果你对我的文章感兴趣，或者有技术问题想交流，欢迎通过以下方式联系我：</p>
+                <p class="contact-description">
+                    如果你对我的文章感兴趣，或者有技术问题想交流，欢迎通过以下方式联系我。
+                </p>
                 <div class="contact-links">
                     <a href="mailto:your-email@example.com" class="contact-link">
-                        <span>📧</span> Email
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-label">Email</div>
                     </a>
                     <a href="https://github.com" target="_blank" class="contact-link">
-                        <span>💻</span> GitHub
+                        <div class="contact-icon">💻</div>
+                        <div class="contact-label">GitHub</div>
                     </a>
                     <a href="#" class="contact-link">
-                        <span>📝</span> 其他平台
+                        <div class="contact-icon">📝</div>
+                        <div class="contact-label">其他平台</div>
                     </a>
                 </div>
             </div>

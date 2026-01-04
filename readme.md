@@ -1,29 +1,41 @@
-# 个人博客首页 (React 版本)
+# 个人博客首页 (React + TailwindCSS + shadcn/ui)
 
-一个基于 React + Vite 构建的现代化个人博客，专注于后端技术分享和生活记录。
+一个采用苹果官网风格设计的现代化个人博客，使用 React + TailwindCSS + shadcn/ui 构建。
 
 ## 项目简介
 
-这是一个使用 React 构建的单页应用（SPA），采用现代化的前端技术栈，提供流畅的用户体验。项目已配置 GitHub Pages 自动部署。
+这是一个使用现代前端技术栈构建的单页应用（SPA），采用苹果官网的设计风格，提供流畅优雅的用户体验。项目已配置 GitHub Pages 自动部署。
 
 ## 技术栈
 
 - **React 18** - 前端框架
 - **React Router** - 路由管理
+- **TailwindCSS** - 实用优先的 CSS 框架
+- **shadcn/ui** - 高质量组件库
+- **Framer Motion** - 动画库
 - **Vite** - 构建工具
 - **GitHub Pages** - 静态网站托管
+
+## 设计特点
+
+- 🎨 **苹果官网风格** - 极简设计、大量留白、优雅动画
+- ✨ **流畅动画** - 使用 Framer Motion 实现丝滑的交互效果
+- 📱 **响应式设计** - 完美适配移动端和桌面端
+- 🎯 **现代化组件** - 基于 shadcn/ui 的高质量组件
+- 🚀 **性能优化** - Vite 构建，快速加载
 
 ## 功能特性
 
 - ✅ React 单页应用
 - ✅ 响应式设计，支持移动端和桌面端
-- ✅ 现代化UI设计（Cursor 官网风格）
+- ✅ 苹果官网风格的现代化UI设计
 - ✅ 文章分类筛选（技术/生活）
 - ✅ 文章详情页
 - ✅ 在线 Markdown 编辑器
 - ✅ 自动保存草稿
 - ✅ 文章预览功能
 - ✅ 本地存储文章
+- ✅ 流畅的页面动画
 
 ## 项目结构
 
@@ -31,6 +43,9 @@
 .
 ├── src/
 │   ├── components/      # React 组件
+│   │   ├── ui/          # shadcn/ui 组件
+│   │   │   ├── button.jsx
+│   │   │   └── card.jsx
 │   │   ├── Navbar.jsx
 │   │   └── Footer.jsx
 │   ├── pages/           # 页面组件
@@ -39,6 +54,8 @@
 │   │   └── Editor.jsx
 │   ├── data/            # 数据文件
 │   │   └── articles.js
+│   ├── lib/             # 工具函数
+│   │   └── utils.js
 │   ├── utils/           # 工具函数
 │   │   └── markdown.js
 │   ├── App.jsx          # 主应用组件
@@ -47,7 +64,9 @@
 │   └── workflows/
 │       └── deploy.yml   # GitHub Actions 部署配置
 ├── package.json
-├── vite.config.js
+├── tailwind.config.js   # TailwindCSS 配置
+├── postcss.config.js    # PostCSS 配置
+├── vite.config.js       # Vite 配置
 └── index.html
 ```
 
@@ -135,13 +154,31 @@ npm run preview
 
 ### 修改样式
 
-所有样式文件在对应的组件目录中，使用 CSS 变量统一管理主题色。
+使用 TailwindCSS 类名进行样式定制，所有样式都在组件文件中。
+
+### 添加新组件
+
+使用 shadcn/ui 的方式添加新组件：
+
+1. 在 `src/components/ui/` 目录创建组件文件
+2. 使用 `cn()` 工具函数合并类名
+3. 遵循 TailwindCSS 的实用优先原则
+
+## 使用的库和工具
+
+- **TailwindCSS** - 实用优先的 CSS 框架
+- **shadcn/ui** - 基于 Radix UI 和 TailwindCSS 的组件库
+- **Framer Motion** - 生产级的 React 动画库
+- **Lucide React** - 精美的图标库
+- **class-variance-authority** - 组件变体管理
+- **clsx** + **tailwind-merge** - 类名工具
 
 ## 注意事项
 
 - 文章数据存储在 `localStorage` 中，清除浏览器数据会丢失保存的文章
 - GitHub Pages 部署需要几分钟时间
 - 确保 `vite.config.js` 中的 `base` 配置与仓库路径一致
+- TailwindCSS 会自动移除未使用的样式，确保构建产物最小化
 
 ## 许可证
 

@@ -5,13 +5,12 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import ArticleDetail from './pages/ArticleDetail';
 import Editor from './pages/Editor';
-import './App.css';
 
 function App() {
   return (
-    <div className="app">
+    <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="main-content">
+      <main className="flex-1">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/article/:id" element={<ArticleDetail />} />

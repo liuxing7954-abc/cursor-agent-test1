@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Search, Sun, Moon, Menu, X } from 'lucide-react';
+import { Search, Sun, Menu, X } from 'lucide-react';
 
 function ReferenceHome() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -16,10 +16,10 @@ function ReferenceHome() {
         <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <div className="flex items-center space-x-2">
+            <a href="/" className="flex items-center space-x-2 group">
               <img src="/cat.svg" alt="logo" className="w-6 h-6" />
-              <span className="text-base font-medium text-gray-900">Blog</span>
-            </div>
+              <span className="text-base font-medium text-gray-900 group-hover:text-gray-600 transition-colors">Blog</span>
+            </a>
             
             {/* Desktop Menu */}
             <nav className="hidden md:flex items-center space-x-6">
@@ -43,10 +43,13 @@ function ReferenceHome() {
             {/* Right Actions */}
             <div className="flex items-center space-x-2">
               {/* Search Button */}
-              <button className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 transition-colors text-sm text-gray-600">
+              <button className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 transition-colors text-sm text-gray-600 group">
                 <Search className="h-4 w-4" />
-                <span>搜索文档</span>
-                <kbd className="px-1.5 py-0.5 text-xs bg-gray-100 rounded border border-gray-200">K</kbd>
+                <span className="group-hover:text-gray-900">搜索文档</span>
+                <div className="flex items-center gap-1">
+                  <kbd className="px-1.5 py-0.5 text-xs bg-gray-100 rounded border border-gray-200 text-gray-500">⌘</kbd>
+                  <kbd className="px-1.5 py-0.5 text-xs bg-gray-100 rounded border border-gray-200 text-gray-500">K</kbd>
+                </div>
               </button>
               
               {/* Theme Toggle */}
@@ -72,10 +75,10 @@ function ReferenceHome() {
       {/* Hero Section - 完全复刻 */}
       <section 
         ref={heroRef}
-        className="pt-24 pb-20"
+        className="pt-20 pb-16"
       >
         <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-16 py-16">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-12 py-12">
             {/* 左侧文字内容 */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -83,25 +86,25 @@ function ReferenceHome() {
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="flex-1 text-center md:text-left"
             >
-              <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight tracking-tight">
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 mb-2">
+              <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold mb-4 leading-[1.1] tracking-tight">
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 mb-2">
                   Jiu XianZai
                 </span>
                 <span className="block text-gray-900">个人博客</span>
               </h1>
-              <p className="text-xl md:text-2xl text-gray-600 mb-10 font-light">
+              <p className="text-xl md:text-2xl text-gray-600 mb-8 font-light leading-relaxed">
                 持续更新中...
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
                 <a 
                   href="#" 
-                  className="inline-flex items-center justify-center px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors text-sm font-medium"
+                  className="inline-flex items-center justify-center px-6 py-2.5 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors text-sm font-medium"
                 >
                   技术文档
                 </a>
                 <a 
                   href="#" 
-                  className="inline-flex items-center justify-center px-6 py-3 bg-white text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium"
+                  className="inline-flex items-center justify-center px-6 py-2.5 bg-white text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium"
                 >
                   面试相关
                 </a>
@@ -115,12 +118,12 @@ function ReferenceHome() {
               transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="flex-shrink-0 w-full md:w-auto"
             >
-              <div className="relative w-72 h-72 md:w-80 md:h-80 mx-auto">
+              <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto">
                 {/* 背景光晕 */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 rounded-3xl blur-3xl opacity-60 -z-10" />
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 rounded-3xl blur-3xl opacity-50 -z-10" />
                 {/* 图片容器 */}
                 <div className="relative w-full h-full bg-white rounded-3xl shadow-2xl flex items-center justify-center border border-gray-100 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-purple-50/50" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 to-purple-50/30" />
                   <img 
                     src="/cat.svg" 
                     alt="logo" 
@@ -136,7 +139,7 @@ function ReferenceHome() {
       {/* Features Section - 完全复刻 */}
       <section 
         ref={featuresRef}
-        className="py-20 bg-gray-50"
+        className="py-16 bg-gray-50"
       >
         <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
           <div className="grid md:grid-cols-3 gap-6">

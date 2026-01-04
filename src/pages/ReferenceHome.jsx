@@ -10,7 +10,7 @@ function ReferenceHome() {
   const featuresInView = useInView(featuresRef, { once: true });
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen" style={{ backgroundColor: '#ffffff' }}>
       {/* 导航栏 - 完全复刻 VitePress 风格 */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
         <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
@@ -83,6 +83,7 @@ function ReferenceHome() {
       <section 
         ref={heroRef}
         className="pt-20 pb-16"
+        style={{ backgroundColor: '#ffffff' }}
       >
         <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
           <div className="flex flex-col md:flex-row items-center justify-between gap-12 py-12">
@@ -166,7 +167,8 @@ function ReferenceHome() {
       {/* Features Section - 完全复刻 */}
       <section 
         ref={featuresRef}
-        className="py-16 bg-gray-50"
+        className="py-16"
+        style={{ backgroundColor: '#f6f6f7' }}
       >
         <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
           <div className="grid md:grid-cols-3 gap-6">
@@ -209,7 +211,7 @@ function ReferenceHome() {
       </section>
 
       {/* Footer - 完全复刻 */}
-      <footer className="py-12 border-t border-gray-200 bg-white">
+      <footer className="py-12 border-t border-gray-200" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-[1440px] mx-auto px-6 lg:px-12 text-center">
           <p className="text-sm text-gray-600 mb-2 font-light">Will Try My Best.</p>
           <p className="text-xs text-gray-500">Copyright © 2025-present Jiu XianZai</p>

@@ -16,8 +16,15 @@ function ReferenceHome() {
         <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <a href="/" className="flex items-center space-x-2 group">
-              <img src="/cat.svg" alt="logo" className="w-6 h-6" />
+            <a href="/cursor-agent-test1/" className="flex items-center space-x-2 group">
+              <img 
+                src="https://blog-3b8.pages.dev/cat.svg" 
+                alt="logo" 
+                className="w-6 h-6"
+                onError={(e) => {
+                  e.target.src = '/cursor-agent-test1/cat.svg';
+                }}
+              />
               <span className="text-base font-medium text-gray-900 group-hover:text-gray-600 transition-colors">Blog</span>
             </a>
             
@@ -111,7 +118,7 @@ function ReferenceHome() {
               </div>
             </motion.div>
 
-            {/* 右侧图片 */}
+            {/* 右侧图片 - 完全复刻参考博客 */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={heroInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
@@ -119,16 +126,36 @@ function ReferenceHome() {
               className="flex-shrink-0 w-full md:w-auto"
             >
               <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto">
-                {/* 背景光晕 */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 rounded-3xl blur-3xl opacity-50 -z-10" />
-                {/* 图片容器 */}
-                <div className="relative w-full h-full bg-white rounded-3xl shadow-2xl flex items-center justify-center border border-gray-100 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 to-purple-50/30" />
-                  <img 
-                    src="/cat.svg" 
-                    alt="logo" 
-                    className="w-32 h-32 relative z-10"
+                {/* image-container */}
+                <div className="relative w-full h-full">
+                  {/* image-bg - 参考博客的背景层 */}
+                  <div 
+                    className="absolute inset-0 rounded-3xl"
+                    style={{
+                      background: 'radial-gradient(circle at 50% 50%, rgba(100, 108, 255, 0.1) 0%, rgba(159, 122, 234, 0.1) 50%, transparent 100%)',
+                      filter: 'blur(40px)',
+                      transform: 'scale(1.2)',
+                    }}
                   />
+                  {/* 图片容器 */}
+                  <div className="relative w-full h-full bg-white rounded-3xl shadow-2xl flex items-center justify-center border border-gray-100 overflow-hidden">
+                    {/* 内部渐变背景 */}
+                    <div 
+                      className="absolute inset-0"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(100, 108, 255, 0.05) 0%, rgba(159, 122, 234, 0.05) 100%)',
+                      }}
+                    />
+                    <img 
+                      src="https://blog-3b8.pages.dev/cat.svg" 
+                      alt="logo" 
+                      className="w-32 h-32 relative z-10"
+                      onError={(e) => {
+                        // 如果远程图片加载失败，使用本地图片
+                        e.target.src = '/cursor-agent-test1/cat.svg';
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
             </motion.div>

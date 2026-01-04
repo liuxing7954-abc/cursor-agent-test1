@@ -10,8 +10,13 @@ export default defineConfig({
     // 构建后复制 index.html 为 404.html，用于 GitHub Pages SPA 路由支持
     {
       name: 'copy-404',
-      closeBundle() {
-        copyFileSync('dist/index.html', 'dist/404.html');
+      writeBundle() {
+        try {
+          copyFileSync('dist/index.html', 'dist/404.html');
+          console.log('✓ 已创建 404.html 用于 GitHub Pages SPA 路由支持');
+        } catch (err) {
+          console.error('创建 404.html 失败:', err);
+        }
       }
     }
   ],

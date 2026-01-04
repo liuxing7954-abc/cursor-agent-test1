@@ -19,13 +19,19 @@
 
 ```
 .
-├── index.html      # 主页面HTML结构
-├── styles.css      # 样式文件
-├── script.js       # JavaScript交互逻辑
-└── readme.md       # 项目说明文档
+├── .github/
+│   └── workflows/
+│       └── deploy.yml    # GitHub Actions 部署配置
+├── .nojekyll             # 禁用 Jekyll 处理
+├── index.html            # 主页面HTML结构
+├── styles.css            # 样式文件
+├── script.js             # JavaScript交互逻辑
+└── readme.md             # 项目说明文档
 ```
 
 ## 使用方法
+
+### 本地预览
 
 1. 直接在浏览器中打开 `index.html` 文件即可查看效果
 2. 或者使用本地服务器运行：
@@ -37,6 +43,43 @@
    npx http-server
    ```
 3. 访问 `http://localhost:8000` 查看博客首页
+
+### GitHub Pages 部署
+
+#### 方法一：使用 GitHub Actions（推荐，已配置）
+
+1. **推送代码到 GitHub**
+   ```bash
+   git add .
+   git commit -m "Add blog homepage"
+   git push origin cursor/personal-blog-homepage-a9dc
+   ```
+
+2. **启用 GitHub Pages**
+   - 进入 GitHub 仓库页面
+   - 点击 `Settings` → `Pages`
+   - 在 `Source` 部分选择 `GitHub Actions`
+   - 保存设置
+
+3. **等待部署完成**
+   - 推送代码后，GitHub Actions 会自动触发部署
+   - 在仓库的 `Actions` 标签页可以查看部署进度
+   - 部署完成后，访问 `https://你的用户名.github.io/仓库名/` 即可查看
+
+#### 方法二：手动设置 GitHub Pages
+
+1. 进入 GitHub 仓库的 `Settings` → `Pages`
+2. 在 `Source` 部分选择 `Deploy from a branch`
+3. 选择分支（如 `main` 或 `cursor/personal-blog-homepage-a9dc`）
+4. 选择 `/ (root)` 目录
+5. 点击 `Save`
+6. 等待几分钟后访问 `https://你的用户名.github.io/仓库名/`
+
+#### 注意事项
+
+- 如果使用自定义域名，需要在仓库根目录创建 `CNAME` 文件
+- 项目已包含 `.nojekyll` 文件，确保 GitHub Pages 正确显示静态文件
+- 首次部署可能需要几分钟时间
 
 ## 自定义配置
 

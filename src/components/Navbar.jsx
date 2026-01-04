@@ -11,7 +11,7 @@ function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -70,27 +70,27 @@ function Navbar() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/80 backdrop-blur-xl border-b border-gray-200/50 shadow-sm'
+          ? 'bg-white/70 backdrop-blur-xl border-b border-gray-200/50 shadow-sm'
           : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center">
+        <div className="flex items-center justify-between h-14">
+          <Link to="/" className="flex items-center space-x-2 group">
             <motion.span
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="text-lg font-semibold text-black"
+              className="text-base font-semibold text-black group-hover:text-gray-700 transition-colors"
             >
               老王的技术博客
             </motion.span>
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => (
               <Link
                 key={item.path}
@@ -136,13 +136,13 @@ function Navbar() {
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="md:hidden bg-white/95 backdrop-blur-xl border-t border-gray-200"
           >
-            <div className="px-6 py-4 space-y-3">
+            <div className="px-6 py-3 space-y-2">
               {navItems.map((item) => (
                 <Link
                   key={item.path}
                   to={item.path}
                   onClick={(e) => handleNavClick(e, item)}
-                  className={`block text-base font-medium transition-colors ${
+                  className={`block text-sm font-medium transition-colors py-2 ${
                     isActive(item) ? 'text-black' : 'text-gray-600'
                   }`}
                 >
